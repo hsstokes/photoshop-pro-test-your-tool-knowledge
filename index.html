@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photoshop Tools Quiz</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+            background-image:
+                linear-gradient(#87CEEB 1px, transparent 1px),
+                linear-gradient(90deg, #87CEEB 1px, transparent 1px),
+                linear-gradient(#98FB98 1px, transparent 1px),
+                linear-gradient(90deg, #98FB98 1px, transparent 1px),
+                linear-gradient(rgba(135, 206, 235, 0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(135, 206, 235, 0.3) 1px, transparent 1px);
+            background-size: 
+                100px 100px,
+                100px 100px,
+                20px 20px,
+                20px 20px,
+                4px 4px,
+                4px 4px;
+        }
+        .quiz-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            background-color: rgba(152, 251, 152, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #4CAF50;
+            font-weight: normal;
+        }
+        h1 span {
+            display: inline-block;
+            margin: 0 1px;
+        }
+        h1 span:nth-child(5n+1) { font-family: 'Times New Roman', serif; }
+        h1 span:nth-child(5n+2) { font-family: 'Arial', sans-serif; font-style: italic; }
+        h1 span:nth-child(5n+3) { font-family: 'Courier New', monospace; }
+        h1 span:nth-child(5n+4) { font-family: 'Georgia', serif; }
+        h1 span:nth-child(5n) { font-family: 'Verdana', sans-serif; letter-spacing: 1px; }
+        .question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            background-color: rgba(152, 251, 152, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #4CAF50;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        button {
+            font-family: 'Courier New', monospace;
+            margin: 5px 0;
+            padding: 10px;
+            background-color: rgba(152, 251, 152, 0.2);
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        button:hover {
+            background-color: rgba(152, 251, 152, 0.5);
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            background-color: rgba(152, 251, 152, 0.3);
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #4CAF50;
+        }
+        .tool-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <h1 id="quizTitle">Recap of Tools Learnt Today: Test Your Knowledge</h1>
+        <div id="quiz"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const quizData = [
+            {
+                question: "Which tool is used for selecting and moving objects in Photoshop?",
+                options: [
+                    {text: "Magic Wand Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M12 2L9 9H15L12 2ZM2 12L9 15V9L2 12ZM22 12L15 9V15L22 12ZM12 22L15 15H9L12 22Z" fill="#333"/></svg>'},
+                    {text: "Move Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M10 9h4V5l6 7-6 7v-4h-4v4l-6-7 6-7v4z" fill="#333"/></svg>'},
+                    {text: "Dodge Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><circle cx="12" cy="12" r="10" stroke="#333" fill="none"/><circle cx="12" cy="12" r="6" fill="#333"/></svg>'},
+                    {text: "Content Aware Fill", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><rect x="3" y="3" width="18" height="18" fill="none" stroke="#333"/><path d="M15 9L9 15M9 9L15 15" stroke="#333"/></svg>'}
+                ],
+                correct: 1
+            },
+            {
+                question: "Which tool is best for selecting areas of similar color?",
+                options: [
+                    {text: "Move Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M10 9h4V5l6 7-6 7v-4h-4v4l-6-7 6-7v4z" fill="#333"/></svg>'},
+                    {text: "Object Selection Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M3 3h18v18H3V3zm16 16V5H5v14h14z" fill="#333"/><circle cx="12" cy="12" r="4" fill="#333"/></svg>'},
+                    {text: "Magic Wand Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M12 2L9 9H15L12 2ZM2 12L9 15V9L2 12ZM22 12L15 9V15L22 12ZM12 22L15 15H9L12 22Z" fill="#333"/></svg>'},
+                    {text: "Remove Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><circle cx="12" cy="12" r="10" stroke="#333" fill="none"/><path d="M8 8L16 16M16 8L8 16" stroke="#333"/></svg>'}
+                ],
+                correct: 2
+            },
+            {
+                question: "Which tool is used to lighten specific areas of an image?",
+                options: [
+                    {text: "Dodge Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><circle cx="12" cy="12" r="10" stroke="#333" fill="none"/><circle cx="12" cy="12" r="6" fill="#333"/></svg>'},
+                    {text: "Burn Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><circle cx="12" cy="12" r="10" stroke="#333" fill="none"/><path d="M12 6v12M8 12h8" stroke="#333"/></svg>'},
+                    {text: "Content Aware Fill", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><rect x="3" y="3" width="18" height="18" fill="none" stroke="#333"/><path d="M15 9L9 15M9 9L15 15" stroke="#333"/></svg>'},
+                    {text: "Remove Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><circle cx="12" cy="12" r="10" stroke="#333" fill="none"/><path d="M8 8L16 16M16 8L8 16" stroke="#333"/></svg>'}
+                ],
+                correct: 0
+            },
+            {
+                question: "Which feature automatically fills selected areas with surrounding content?",
+                options: [
+                    {text: "Magic Wand Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M12 2L9 9H15L12 2ZM2 12L9 15V9L2 12ZM22 12L15 9V15L22 12ZM12 22L15 15H9L12 22Z" fill="#333"/></svg>'},
+                    {text: "Object Selection Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M3 3h18v18H3V3zm16 16V5H5v14h14z" fill="#333"/><circle cx="12" cy="12" r="4" fill="#333"/></svg>'},
+                    {text: "Remove Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><circle cx="12" cy="12" r="10" stroke="#333" fill="none"/><path d="M8 8L16 16M16 8L8 16" stroke="#333"/></svg>'},
+                    {text: "Content Aware Fill", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><rect x="3" y="3" width="18" height="18" fill="none" stroke="#333"/><path d="M15 9L9 15M9 9L15 15" stroke="#333"/></svg>'}
+                ],
+                correct: 3
+            },
+            {
+                question: "Which tool uses AI to help select complex objects in an image?",
+                options: [
+                    {text: "Magic Wand Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M12 2L9 9H15L12 2ZM2 12L9 15V9L2 12ZM22 12L15 9V15L22 12ZM12 22L15 15H9L12 22Z" fill="#333"/></svg>'},
+                    {text: "Move Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M10 9h4V5l6 7-6 7v-4h-4v4l-6-7 6-7v4z" fill="#333"/></svg>'},
+                    {text: "Object Selection Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M3 3h18v18H3V3zm16 16V5H5v14h14z" fill="#333"/><circle cx="12" cy="12" r="4" fill="#333"/></svg>'},
+                    {text: "Remove Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><circle cx="12" cy="12" r="10" stroke="#333" fill="none"/><path d="M8 8L16 16M16 8L8 16" stroke="#333"/></svg>'}
+                ],
+                correct: 2
+            },
+            {
+                question: "Which tool is used to remove unwanted elements from an image?",
+                options: [
+                    {text: "Content Aware Fill", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><rect x="3" y="3" width="18" height="18" fill="none" stroke="#333"/><path d="M15 9L9 15M9 9L15 15" stroke="#333"/></svg>'},
+                    {text: "Magic Wand Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M12 2L9 9H15L12 2ZM2 12L9 15V9L2 12ZM22 12L15 9V15L22 12ZM12 22L15 15H9L12 22Z" fill="#333"/></svg>'},
+                    {text: "Move Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><path d="M10 9h4V5l6 7-6 7v-4h-4v4l-6-7 6-7v4z" fill="#333"/></svg>'},
+                    {text: "Remove Tool", icon: '<svg viewBox="0 0 24 24" class="tool-icon"><circle cx="12" cy="12" r="10" stroke="#333" fill="none"/><path d="M8 8L16 16M16 8L8 16" stroke="#333"/></svg>'}
+                ],
+                correct: 3
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function applyTypographyStyle(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.innerText;
+            element.innerHTML = text.split('').map(char => 
+                char === ' ' ? ' ' : `<span>${char}</span>`
+            ).join('');
+        }
+
+        function loadQuestion() {
+            const quizElement = document.getElementById("quiz");
+            const currentQuizData = quizData[currentQuestion];
+
+            quizElement.innerHTML = `
+                <div class="question">${currentQuizData.question}</div>
+                <div class="options">
+                    ${currentQuizData.options.map((option, index) => 
+                        `<button onclick="checkAnswer(${index})">${option.icon}${option.text}</button>`
+                    ).join('')}
+                </div>
+            `;
+        }
+
+        function checkAnswer(answer) {
+            if (answer === quizData[currentQuestion].correct) {
+                score++;
+            }
+
+            currentQuestion++;
+
+            if (currentQuestion < quizData.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            const quizElement = document.getElementById("quiz");
+            const resultElement = document.getElementById("result");
+
+            quizElement.innerHTML = "";
+            resultElement.innerHTML = `You scored ${score} out of ${quizData.length}!`;
+        }
+
+        // Apply typography style to title and load the first question
+        applyTypographyStyle("quizTitle");
+        loadQuestion();
+    </script>
+</body>
+</html>
